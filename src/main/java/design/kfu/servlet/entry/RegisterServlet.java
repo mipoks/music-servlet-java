@@ -41,11 +41,15 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("title", "Регистрация");
-        String name = URLCoder.decodeURIComponent(req.getParameter("name"));
-        String email = req.getParameter("email").toLowerCase();
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
         String pwd1 = req.getParameter("pwd1");
         String pwd2 = req.getParameter("pwd2");
         String agree = req.getParameter("agree");
+        if (name != null && email != null) {
+            name = URLCoder.decodeURIComponent(name);
+            email = email.toLowerCase();
+        }
         personForm.setEmail(email);
         personForm.setName(name);
         personForm.setPassword(pwd1);

@@ -17,15 +17,23 @@ public class SQLPersonSaver {
 
     //insert person
     //language=SQL
-    private final static String SQL_PERSON_INSERT = "INSERT INTO persons(email, name, password) VALUES (?,?,?)";
+    private final static String SQL_INSERT_PERSON = "INSERT INTO persons(email, name, password) VALUES (?,?,?)";
 
     //select person
     //language=SQL
-    private final static String SQL_PERSON_SELECT = "SELECT * FROM persons WHERE email=(?) LIMIT 1";
+    private final static String SQL_SELECT_BY_EMAIL = "SELECT * FROM persons WHERE email=(?) LIMIT 1";
 
     //update person
     //language=SQL
-    private final static String SQL_PERSON_UPDATE = "UPDATE persons SET name=(?), password=(?), song_count=(?) WHERE id=(?)";
+    private final static String SQL_UPDATE_PERSON = "UPDATE persons SET name=(?), password=(?), song_count=(?) WHERE id=(?)";
+
+    //delete person
+    //language=SQL
+    private final static String SQL_DELETE_PERSON = "DELETE FROM persons WHERE id=(?)";
+
+    //delete person's songs
+    //language=SQL
+    private final static String SQL_DELETE_PSONGS = "DELETE FROM person_songs WHERE person_id=(?)";
 
 
     private JdbcTemplate jdbcTemplate;
@@ -41,17 +49,24 @@ public class SQLPersonSaver {
     }
 
     public int insert(Person person) {
-        jdbcTemplate.query(SQL_PERSON_INSERT, rowMapper,
+        jdbcTemplate.query(SQL_INSERT_PERSON, rowMapper,
                 person.getEmail(), person.getName(), person.getPassword());
         return rowMapper.getResult();
     }
 
     public int delete(Person person) {
-        return 0;
+        jdbcTemplate.connect();
+        jdbcTemplate.query(SQL_DELETE_PSONGS, rowMapper,
+                person.getId());
+
+        jdbcTemplate.query(SQL_DELETE_PERSON, rowMapper,
+                person.getId());
+        jdbcTemplate.commit();
+        return rowMapper.getResult();
     }
 
     public Person findByEmail(String email) {
-        Collection<Person> collection = jdbcTemplate.query(SQL_PERSON_SELECT, rowMapper, email);
+        Collection<Person> collection = jdbcTemplate.query(SQL_SELECT_BY_EMAIL, rowMapper, email);
         Iterator it = collection.iterator();
         if (it.hasNext())
             return (Person) it.next();
@@ -59,7 +74,7 @@ public class SQLPersonSaver {
     }
 
     public int update(Person person) {
-        jdbcTemplate.query(SQL_PERSON_UPDATE, rowMapper,
+        jdbcTemplate.query(SQL_UPDATE_PERSON, rowMapper,
                 person.getName(), person.getPassword(),
                 person.getSongCount(), person.getId());
         return rowMapper.getResult();

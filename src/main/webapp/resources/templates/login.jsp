@@ -33,8 +33,8 @@
                     <input type="password" class="form-control form-control-40" name="password" placeholder="********"
                            id="exampleInputPassword1">
                 </div>
-                <button type="submit" class="btn btn-primary login-submit">Войти</button>
-                <a href="register" class="btn btn-primary login-submit left">Зарегистрироваться</a>
+                <button type="submit" class="btn btn-default login-submit">Войти</button>
+                <a href="register" class="btn btn-default login-submit left">Зарегистрироваться</a>
 
                 <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
             </form>

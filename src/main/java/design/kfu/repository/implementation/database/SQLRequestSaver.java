@@ -99,9 +99,11 @@ public class SQLRequestSaver {
         int deleted = 0;
         while (it.hasNext()) {
             Request request = (Request) it.next();
+            jdbcTemplate.connect();
             deleteInfo(request);
             jdbcTemplate.query(SQL_REQUEST_DELETE, rowMapper, request.getId());
             deleted += rowMapper.getResult();
+            jdbcTemplate.commit();
         }
         return deleted;
     }

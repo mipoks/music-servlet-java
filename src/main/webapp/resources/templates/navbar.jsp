@@ -49,7 +49,7 @@
             <form method="GET" action="<%=request.getContextPath()%>/search" class="form-inline my-2 my-lg-0">
                 <input class="form-control form-control-2 mr-sm-2" name="search" type="search" placeholder="Слушать"
                        aria-label="Search">
-                <button class="btn my-2 my-sm-0" type="submit">Найти</button>
+                <button class="btn btn-default my-2 my-sm-0" type="submit">Найти</button>
             </form>
         </div>
     </nav>

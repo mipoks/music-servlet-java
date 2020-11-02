@@ -14,13 +14,48 @@ public class JdbcTemplate <T>  {
     private ConnectionGiver connectionGiver;
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
+    private Connection connection;
+    private boolean connected = false;
 
     public JdbcTemplate(ConnectionGiver connectionGiver) {
         this.connectionGiver = connectionGiver;
     }
 
+    //use this and commit() if you want to do smth in one transaction
+    public void connect() {
+        try {
+            connection = connectionGiver.getConnection();
+            connection.setAutoCommit(false);
+            connected = true;
+        } catch (SQLException e) {
+            connected = false;
+            try {
+                connection.close();
+            } catch (SQLException ex) {}
+            e.printStackTrace();
+        }
+    }
+
+    //use this and connect() if you want to do smth in one transaction
+    public void commit() {
+        try {
+            connection.commit();
+            connection.setAutoCommit(true);
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        connected = false;
+    }
+
     public Collection<T> query(String sql, RowMapper<T> rowMapper, Object... args) {
-        try(Connection connection = connectionGiver.getConnection()) {
+        if (!connected) {
+            try {
+                connection = connectionGiver.getConnection();
+            } catch (SQLException e) {
+            }
+        }
+        try {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = null;
             Collection<T> result = new ArrayList<>();
@@ -31,7 +66,7 @@ public class JdbcTemplate <T>  {
                 position++;
             }
             System.out.println(sql);
-            if (sql.toUpperCase().contains("UPDATE") || sql.toUpperCase().contains("DELETE") || sql.toUpperCase().contains("INSERT")) {
+            if (sql.contains("UPDATE") || sql.contains("DELETE") || sql.contains("INSERT")) {
                 rowMapper.setResult(preparedStatement.executeUpdate());
             } else {
                 resultSet = preparedStatement.executeQuery();
@@ -56,6 +91,12 @@ public class JdbcTemplate <T>  {
                     preparedStatement.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                }
+            }
+            if (!connected) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
                 }
             }
         }

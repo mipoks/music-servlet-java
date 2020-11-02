@@ -47,7 +47,7 @@
                     </label>
                 </div>
                 <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
-                <button type="submit" class="btn btn-primary login-submit" id="register">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-default login-submit" id="register">Зарегистрироваться</button>
 
             </form>
         </t:form>

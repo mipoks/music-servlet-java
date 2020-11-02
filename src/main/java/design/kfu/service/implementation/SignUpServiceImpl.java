@@ -5,6 +5,8 @@ import design.kfu.entity.Person;
 import design.kfu.helper.entity.PasswordHasher;
 import design.kfu.repository.PersonRepository;
 import design.kfu.service.MainService;
+import design.kfu.service.SecurityService;
+import design.kfu.service.SignInService;
 import design.kfu.service.SignUpService;
 
 import java.sql.SQLException;
@@ -19,9 +21,14 @@ public class SignUpServiceImpl implements SignUpService {
     }
 
     @Override
+    public int expel(Person person) {
+        return dbPerson.delete(person);
+    }
+
+    @Override
     public int signUp(PersonForm personForm) {
         int errors = personForm.isValid();
-
+        System.out.println("ERRORS " + errors);
         if (errors <= 0) {
             return errors;
         } else {

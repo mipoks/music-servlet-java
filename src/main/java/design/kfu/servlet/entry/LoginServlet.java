@@ -53,8 +53,11 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email").toLowerCase();
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
+        if (email != null) {
+            email = email.toLowerCase();
+        }
         PersonForm personForm = new PersonForm(email, password);
 
         String error = "false";

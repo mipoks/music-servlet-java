@@ -48,7 +48,20 @@
                 </div>
 
                 <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
-                <button type="submit" id="changeprofile" class="btn btn-primary login-submit">Сохранить</button>
+
+                <button type="submit" id="changeprofile" class="btn btn-default login-submit">Сохранить</button>
+            </form>
+        </t:form>
+        <t:form>
+            <form method="POST" action="profile">
+                <div class="form-group" style="margin-top: 40px">
+                    <label for="passdelete">Введите пароль для удаления аккаунта</label>
+                    <input type="password" class="form-control" name="passworddelete" id="passdelete"
+                           placeholder="********">
+                </div>
+                <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
+
+                <button type="submit" id="deleteprofile" class="btn btn-right btn-danger login-submit">Удалить аккаунт</button>
             </form>
         </t:form>
     </div>

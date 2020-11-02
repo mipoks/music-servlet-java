@@ -94,7 +94,7 @@ insert into songs (id, original_url, name, url, updated) values ('1219427', '/mu
 insert into person_songs (person_id, song_id) values ('1', '1219427'), ('1', '21823755');
 
 
-insert into requests (req_name, time, id, length, songs) values ('сплин', '1604150473', '1', '5', '{"166067": "T", "169533": "T", "198082": "T", "467234": "T", "1360338": "T"}');
+insert into requests (req_name, time, id, length, songs) values ('сплин', '1604150473', '1', '1', '{"1219427": "T"}');
 
 
 insert into request_info (requested_times, created, request_id, last_request_time) values ('3', '2020-10-31', '1', '2020-10-31');

@@ -49,11 +49,12 @@ public class MyMusicServlet extends HttpServlet {
         }
 
         String urlOrig = req.getParameter("orig");
-        String name = URLCoder.decodeURIComponent(req.getParameter("name"));
+        String name = req.getParameter("name");
 
-        if (id <= 0 || urlOrig.equals("") || name.equals(""))
+        if (id <= 0 || urlOrig == null || name == null || urlOrig.equals("") || name.equals(""))
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         else {
+            name = URLCoder.decodeURIComponent(name);
             songForm.setId(id);
             songForm.setUrlOrig(urlOrig);
             songForm.setName(name);

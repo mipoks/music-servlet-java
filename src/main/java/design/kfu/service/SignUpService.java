@@ -1,5 +1,6 @@
 package design.kfu.service;
 
+import design.kfu.entity.Person;
 import design.kfu.entity.dto.PersonForm;
 
 public interface SignUpService {
@@ -15,4 +16,6 @@ public interface SignUpService {
     int SUCCESS = 1;
     int REGISTERED_WITH_ERROR = 2;
     int signUp(PersonForm personForm);
+
+    int expel(Person person);
 }
