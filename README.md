@@ -1,4 +1,4 @@
-###How to set your database connection?
+### How to set your database connection?
 
 1. Implement interface ConnectionGiver  
 (package design.kfu.helper.database)
@@ -8,10 +8,10 @@ connectionGiver = new YourConnectionGiver();
 
 Important! Your ConnectionGiver should give new Connection for each method call getConnection()
 
-####Example:  
+#### Example:  
 class ConnectionLocal in  
 package design.kfu.helper.database.implementation
 
-####Notice 
+#### Notice 
 SQL commands were written for PostgreSQL. If you want to use other DBMS, you should check and correct them in all classes of package design.kfu.repository.implementation.database
 (if it is neccessary)
