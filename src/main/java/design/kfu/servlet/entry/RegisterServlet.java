@@ -83,6 +83,10 @@ public class RegisterServlet extends HttpServlet {
             info.setBody("Неизвестная ошибка");
             err = true;
         }
+        if (ans == SignUpService.NAME_SIZE_ERROR) {
+            info.setBody("Имя должно быть больше 1, но меньше 30 символов");
+            err = true;
+        }
         if (ans == SignUpService.REGISTERED_WITH_ERROR || ans == SignUpService.SUCCESS) {
             info.setBody(successRegistration);
         }

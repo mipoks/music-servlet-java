@@ -3,6 +3,7 @@ package design.kfu.service;
 import design.kfu.entity.dto.PersonForm;
 
 public interface SignUpService {
+    int NAME_SIZE_ERROR = -8;
     int UNKNOWN_ERROR = -7;
     int EMPTY_FIELD = -6;
     int AGREEMENT_FALSE = -5;

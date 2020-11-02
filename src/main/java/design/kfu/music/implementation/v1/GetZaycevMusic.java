@@ -22,6 +22,7 @@ public class GetZaycevMusic implements MusicGetter {
     private static String urlMusic = "https://zaycev.net";
 
     private Collection<Song> getDoc(String uri, int count) {
+        System.out.println("WE ARE CONNECTING TO ZAYCEV");
         try {
             Document doc = Jsoup.connect(urlMusic + "/" + uri).get();
             Elements elements = doc.getElementsByAttribute("data-url");
@@ -68,6 +69,7 @@ public class GetZaycevMusic implements MusicGetter {
                 songTemp.setOriginalUrl(oldSong.getOriginalUrl());
                 songTemp.setSongName(oldSong.getSongName());
                 songTemp.setTime(new Date().getTime() / 1000);
+                songTemp.setOwn(oldSong.isOwn());
                 oldSong = songTemp;
             }
             songs.add(oldSong);
@@ -77,12 +79,10 @@ public class GetZaycevMusic implements MusicGetter {
     }
 
     public Collection<Song> get(int count, Request request) {
-        System.out.println("WE CONNECTING TO ZAYCEV");
         return getDoc("search.html?query_search=" + request.getSearch(), count);
     }
 
     public Collection<Song> get(int count) {
-        System.out.println("WE CONNECTING TO ZAYCEV");
         return getDoc("", count);
     }
 

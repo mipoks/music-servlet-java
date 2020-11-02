@@ -21,7 +21,7 @@ public class SQLPersonSaver {
 
     //select person
     //language=SQL
-    private final static String SQL_PERSON_SELECT = "SELECT * FROM persons WHERE email=(?)";
+    private final static String SQL_PERSON_SELECT = "SELECT * FROM persons WHERE email=(?) LIMIT 1";
 
     //update person
     //language=SQL

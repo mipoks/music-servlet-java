@@ -31,7 +31,7 @@ public class JdbcTemplate <T>  {
                 position++;
             }
             System.out.println(sql);
-            if (sql.contains("UPDATE") || sql.toLowerCase().contains("DELETE") || sql.toLowerCase().contains("INSERT")) {
+            if (sql.toUpperCase().contains("UPDATE") || sql.toUpperCase().contains("DELETE") || sql.toUpperCase().contains("INSERT")) {
                 rowMapper.setResult(preparedStatement.executeUpdate());
             } else {
                 resultSet = preparedStatement.executeQuery();
@@ -41,7 +41,7 @@ public class JdbcTemplate <T>  {
             }
             return result;
         } catch (SQLException e) {
-            e.getErrorCode();
+            e.printStackTrace();
             rowMapper.setResult(NOT_EXECUTED);
         } finally {
             try {

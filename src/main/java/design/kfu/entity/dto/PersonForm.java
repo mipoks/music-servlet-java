@@ -94,6 +94,8 @@ public class PersonForm {
     public int isValid() {
         if (agree == null)
             return AGREEMENT_FALSE;
+        if (name != null && (name.length() < 1 || name.length() > 30))
+            return NAME_SIZE_ERROR;
         if (!password.equals(pwd2))
             return PWDS_NOT_EQUALS;
         if (password.length() < 6)
