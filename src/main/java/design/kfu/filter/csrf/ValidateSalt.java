@@ -1,4 +1,4 @@
-package design.kfu.csrf;
+package design.kfu.filter.csrf;
 
 import com.google.common.cache.Cache;
 import java.io.IOException;

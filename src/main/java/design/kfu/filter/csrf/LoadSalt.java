@@ -1,12 +1,10 @@
-package design.kfu.csrf;
+package design.kfu.filter.csrf;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
