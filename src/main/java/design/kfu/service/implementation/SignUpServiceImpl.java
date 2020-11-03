@@ -28,7 +28,6 @@ public class SignUpServiceImpl implements SignUpService {
     @Override
     public int signUp(PersonForm personForm) {
         int errors = personForm.isValid();
-        System.out.println("ERRORS " + errors);
         if (errors <= 0) {
             return errors;
         } else {

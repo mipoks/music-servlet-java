@@ -20,27 +20,27 @@ public class PersonRepoImpl implements PersonRepository {
     }
 
     @Override
-    public int save(Person person){
+    public synchronized int save(Person person){
         return sqlPersonSaver.insert(person);
     }
 
     @Override
-    public Collection<Person> getAll() {
+    public synchronized Collection<Person> getAll() {
         return sqlPersonSaver.getAll();
     }
 
     @Override
-    public int update(Person person) {
+    public synchronized int update(Person person) {
         return sqlPersonSaver.update(person);
     }
 
     @Override
-    public Person findByEmail(String email) {
+    public synchronized Person findByEmail(String email) {
         return sqlPersonSaver.findByEmail(email);
     }
 
     @Override
-    public int delete(Person person) {
+    public synchronized int delete(Person person) {
         return sqlPersonSaver.delete(person);
     }
 }
